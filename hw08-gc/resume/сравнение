@@ -1,0 +1,5 @@
+При объеме heap memory 256m - spend msec:12308, sec:12
+При объеме heap memory 2G - spend msec:11579, sec:11
+Результаты до форматирования кода: spend msec:11297, sec:11
+Результаты после форматирования кода: spend msec:5092, sec:5
+Результаты после приведение listValues к простому массиву объектов: spend msec:1553, sec:1

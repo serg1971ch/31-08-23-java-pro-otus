@@ -1,0 +1,9 @@
+
+
+group('ru.otus.Demo')
+
+
+repositories {
+    mavenCentral()
+}
+
