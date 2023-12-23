@@ -7,6 +7,7 @@ plugins {
 group = "ru.otus"
 version = "0.0.1-SNAPSHOT"
 
+
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
 }
@@ -26,7 +27,7 @@ dependencies {
 	implementation("com.h2database:h2")
 	implementation("org.flywaydb:flyway-core")
 	implementation("com.google.code.gson:gson")
-	implementation("org.postgresql:postgresql")
+	implementation("org.postgresql:postgresql:42.6.0")
 	implementation("org.eclipse.jetty:jetty-servlet:11.0.17")
     implementation("org.eclipse.jetty:jetty-webapp:11.0.15")
 	testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
@@ -49,3 +50,4 @@ dependencies {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+

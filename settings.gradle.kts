@@ -1,4 +1,4 @@
-rootProject.name = "28-08-23-java-otus-pro"
+rootProject.name = "31-08-23-java-pro-otus"
 include("hw01-gradle")
 include("hw2")
 include("hw04-collection")
@@ -12,4 +12,4 @@ include("hw19-jdbc")
 include("hw21-jpql")
 include("hw22")
 include("hw24-webServer")
-include("hw22-cache")
+//include("hw22-cache")
