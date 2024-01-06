@@ -8,3 +8,6 @@ create table client (id bigint not null, name varchar(255), address_id bigint, p
 create table phone (id bigint not null, number varchar(255), client_id bigint not null, primary key (id));
 alter table client add constraint fk_client_address_id foreign key (address_id) references address;
 alter table phone add constraint fk_phone_client_id foreign key (client_id) references client;
+select*from client;
+select*from address;
+insert into address(id,street) values (1,'Artema');

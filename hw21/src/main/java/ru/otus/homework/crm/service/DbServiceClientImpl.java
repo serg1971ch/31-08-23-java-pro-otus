@@ -19,13 +19,11 @@ public class DbServiceClientImpl implements DBServiceClient {
 
     private final DataTemplate<Client> clientDataTemplate;
     private final TransactionManager transactionManager;
-    private HwCache<String, Client> myCache = new MyCache<>();
-    private final HwListener<String, Client> listener = new HwListener<>() {
-        @Override
-        public void notify(String key, Client value, String action) {
-            log.info("key: {}, client: {}, action: {}", key, value.getName(), action);
-        }
-    };
+    private final HwCache<String, Client> myCache = new MyCache<>();
+
+
+    private final HwListener<String, Client> listener = (key, value, action) -> log.info("key: {}, client: {}, action: {}", key, value.getName(), action);
+
 
     public DbServiceClientImpl(TransactionManager transactionManager, DataTemplate<Client> clientDataTemplate) {
         this.transactionManager = transactionManager;
@@ -36,7 +34,7 @@ public class DbServiceClientImpl implements DBServiceClient {
     @Override
     public Client saveClient(Client clients) {
         return transactionManager.doInTransaction(session -> {
-            Client clientCloned = null;
+            Client clientCloned;
             try {
                 clientCloned = clients.clone();
             } catch (CloneNotSupportedException e) {
@@ -56,10 +54,9 @@ public class DbServiceClientImpl implements DBServiceClient {
 
     @Override
     public Optional<Client> getClient(long id) {
-        //find MyCache
         var client = myCache.get(getKey(id));
         if (client != null) {
-            return Optional.ofNullable(client);
+            return Optional.of(client);
         } else {
             return transactionManager.doInReadOnlyTransaction(session -> {
                 var clientOptional = clientDataTemplate.findById(session, id);
@@ -75,7 +72,6 @@ public class DbServiceClientImpl implements DBServiceClient {
         return transactionManager.doInReadOnlyTransaction(session -> {
             var clientList = clientDataTemplate.findAll(session);
             log.info("clientList:{}", clientList);
-            //Add MyCache
             clientList.forEach(client -> myCache.put(String.valueOf(client.getId()), client));
             return clientList;
         });
